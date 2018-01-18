@@ -1,0 +1,19 @@
+easy_admin:
+    entities:
+        # List the entity class name you want to manage
+        User :
+            class:  App\Entity\User
+            form:
+                fields:
+                    - { property: 'username' }
+                    - { property: 'email', type: 'email' }
+                    - { property: 'plainPassword', type: 'password', label: 'Password' }
+                    - { property: 'isActive', type: 'checkbox', label: 'Active ?' }
+            new:
+                fields:
+                    - { property: 'plainPassword', type: 'password', label: 'Password', type_options: { required: true } }
+
+            #edit
+
+        Article :
+            class:  App\Entity\Article

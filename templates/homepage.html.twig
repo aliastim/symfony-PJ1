@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+   <h1> Mon contenu </h1>
+    {% for article in articles %}
+        <div>
+            <p>{{ article.title }}</p>
+            <p>{{ article.content }}</p>
+            <a href="/article/{{ article.slug }}"><button type="button" class="btn btn-outline-info">Lire l'article</button></a>
+            <br><br>
+        </div>
+    {% endfor %}
+
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" href="?page=1">First page</a></li>
+            <li class="page-item {% if currentPage <= 1 %} disabled {% endif %}"><a class="page-link"
+                                                                                    href="?page={{ currentPage - 1 }}">&laquo;</a>
+            </li>
+            {% for i in minPage..(currentPage - 1) if (currentPage > 1) %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endfor %}
+
+            <li class="page-item active"><a class="page-link" href="?page={{ currentPage }}">{{ currentPage }}</a>
+
+                {% for i in (currentPage + 1)..maxPage if (currentPage < maxPagination) %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endfor %}
+            <li class="page-item {% if currentPage >= maxPagination %} disabled {% endif %}"><a class="page-link"
+                                                                                                href="?page={{ currentPage + 1 }}">&raquo;</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="?page={{ maxPagination }}">Last page</a></li>
+        </ul>
+    </nav>
+
+{% endblock %}
+
+{% block title %}
+    le titre de ma page
+{% endblock %}
+
